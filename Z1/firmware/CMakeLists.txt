@@ -49,6 +49,7 @@ include_directories(
   lib/CMSIS/CM3/DeviceSupport/ST/STM32F10x
   lib/CMSIS/CM3/CoreSupport
   lib/
+  exercises/exercise1
   )
 
 add_library(stm32fw
@@ -87,6 +88,10 @@ add_library(stm32drivers
     common/system_stm32f10x.c
 )
 
+add_library(exercises
+  exercises/exercise1/USARTCommunication.cpp
+)
+
 target_link_libraries(stm32drivers stm32fw)
 
 add_executable(main
@@ -96,7 +101,7 @@ add_executable(main
     stm32_specific.c
 )
 
-target_link_libraries(main stm32fw stm32drivers stm32fw m gcc)
+target_link_libraries(main stm32fw stm32drivers exercises stm32fw m gcc)
 objcopy_file(main)
 
 add_custom_target(flash openocd -f ${STM32_SOURCE_DIR}/openocd.cfg 

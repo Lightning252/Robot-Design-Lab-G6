@@ -4,6 +4,7 @@
 #include "stm32_specific.h"
 #include <stdint.h>
 #include "led.hpp"
+#include "exercises/exercise1/USARTCommunication.h"
 
 int main()
 {
@@ -26,6 +27,13 @@ int main()
 
     volatile uint32_t delay;
 
+    /*
+        Begin - Aufgabe 2.3
+    */
+    USARTCommunication_start();
+    /*
+        End - Aufgabe 2.3
+    */
     while(1)
     {
         delay = 5000000;
@@ -53,10 +61,12 @@ int main()
 }
 
 void toll(){
+    /*
  	char *data;
 	data = "Gruppe X ist toll";
 	printf(data);
 	USART1_SendData(data, sizeof "Gruppe X ist toll");
+    */
 }
 
 
