@@ -52,6 +52,7 @@ int add_tuple(int pattern_id, int servo_id, int time, int angle){
 	return -2;
 }
 
+//returns an angle
 int get_angle(int pattern_id, int servo_id, int time){
 	for (Pattern p : patterns){
 		if (p.id==pattern_id){
@@ -70,11 +71,13 @@ int get_angle(int pattern_id, int servo_id, int time){
 	return -2;
 }
 
+//uses linear interpolation to estimate an angle
 int get_estimate(vector<tuple<int,int>> values, int time){
 	int before;
 	int before_angle;
 	int after;
-	int after_angle; 
+	int after_angle;
+    int estimate;
 	for (tuple<int,int> v : values) {
 		if (get<0>(v) > time){
 			after = get<0>(v);
@@ -99,8 +102,7 @@ int get_estimate(vector<tuple<int,int>> values, int time){
 			before_angle = get<1>(v);
 		}
 	}
-	int estimate = -1;
-	estimate = (before_angle + after_angle) / 2;
-	return estimate;
+    estimate = before_angle + ((after_angle - before_angle)/(after-before))*(time-before);
+    return estimate;
 }
 
