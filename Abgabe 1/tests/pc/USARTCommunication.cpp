@@ -4,11 +4,11 @@
 #include <fcntl.h>
 #include <iostream>
 #include <stdexcept>
-//#include <termios.h>
+#include <termios.h>
 
 
 void USARTCommunication_start(){
-    /*
+    
     int tty_fd=open("/dev/ttyUSB0", O_RDWR | O_NONBLOCK);
     if(tty_fd < 0)
         throw std::runtime_error("Error opening tty");
@@ -26,5 +26,5 @@ void USARTCommunication_start(){
     cfsetospeed(&tio,B921600);
     cfsetispeed(&tio,B921600);
     tcsetattr(tty_fd,TCSANOW,&tio);
-    */
+    
 }
