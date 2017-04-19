@@ -5,9 +5,12 @@
 #include <iostream>
 #include <stdexcept>
 #include <termios.h>
+#include <string.h>
 
+USARTCommunication::USARTCommunication(){
+}
 
-void USARTCommunication_start(){
+void USARTCommunication::start(){
     
     int tty_fd=open("/dev/ttyUSB0", O_RDWR | O_NONBLOCK);
     if(tty_fd < 0)
@@ -26,5 +29,4 @@ void USARTCommunication_start(){
     cfsetospeed(&tio,B921600);
     cfsetispeed(&tio,B921600);
     tcsetattr(tty_fd,TCSANOW,&tio);
-    
 }

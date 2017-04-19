@@ -2,7 +2,10 @@
 
 int main(int argc, char **argv)
 {
-
-    USARTCommunication_start();
+    USARTCommunication com = USARTCommunication();
+    com.start();
     return 0;
 }
+
+
+
