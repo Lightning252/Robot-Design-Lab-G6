@@ -7,7 +7,7 @@
 
 int main()
 {
-    //enum USART_MODE test;
+    enum USART_MODE test;
     //toll();
     Assert_Configuration();
 
@@ -16,7 +16,7 @@ int main()
     led_init();
 
     USART1_Init(USART_USE_INTERRUPTS);
-    //USART1_Init(test);
+    USART1_Init(test);
     USART2_Init(USART_USE_INTERRUPTS);
 
     printf_setSendFunction(USART1_SendData);
