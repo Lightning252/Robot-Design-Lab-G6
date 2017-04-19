@@ -8,10 +8,6 @@
 #include <string.h>
 
 USARTCommunication::USARTCommunication(){
-}
-
-void USARTCommunication::start(){
-    
     int tty_fd=open("/dev/ttyUSB0", O_RDWR | O_NONBLOCK);
     if(tty_fd < 0)
         throw std::runtime_error("Error opening tty");
@@ -30,3 +26,12 @@ void USARTCommunication::start(){
     cfsetispeed(&tio,B921600);
     tcsetattr(tty_fd,TCSANOW,&tio);
 }
+
+int USARTCommunication::write(unsigned char *data, size_t size){
+    //todo
+}
+int USARTCommunication::read(unsigned char *buffer, size_t buffersize){
+    //todo
+}
+
+

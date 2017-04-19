@@ -1,12 +1,14 @@
 #ifndef USARTCOMMUNICATION_H
 #define USARTCOMMUNICATION_H
 
-//#include "Communication.h"
+#include <stdio.h>
+#include "Communication.h"
 
-class USARTCommunication{
+class USARTCommunication : Communication{
     public:
     USARTCommunication();
-    void start();
+    virtual int write(unsigned char *data, size_t size);
+    virtual int read(unsigned char *buffer, size_t buffersize);
 };
 
 #endif
