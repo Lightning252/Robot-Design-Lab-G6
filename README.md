@@ -14,7 +14,7 @@
 
 - 2.1 (main.cpp)
 - 2.2 (tests/stubs/)
-- 2.3 (hat leon angefangen)
+- 2.3 (Abgabe\ 1/Aufgabe\ 2.3/)
 - 2.4
 - 2.5
 - 3 (engine.cpp)(noch nichts getestet)

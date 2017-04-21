@@ -33,8 +33,7 @@ int USARTCommunication::write(unsigned char *data, size_t size){
     return ::write(tty_fd, data, size);
 }
 int USARTCommunication::read(unsigned char *buffer, size_t buffersize){
-    //read(tty_fd, *buffer, buffersize);
-    return 0;
+    return ::read(tty_fd, buffer, buffersize);
 }
 
 
