@@ -6,9 +6,11 @@
 #include <stdexcept>
 #include <termios.h>
 #include <string.h>
+#include <unistd.h>
+#include <stdio.h>
 
 USARTCommunication::USARTCommunication(){
-    int tty_fd=open("/dev/ttyUSB0", O_RDWR | O_NONBLOCK);
+    this->tty_fd=open("/dev/ttyUSB0", O_RDWR | O_NONBLOCK);
     if(tty_fd < 0)
         throw std::runtime_error("Error opening tty");
 
@@ -28,10 +30,11 @@ USARTCommunication::USARTCommunication(){
 }
 
 int USARTCommunication::write(unsigned char *data, size_t size){
-    //todo
+    return ::write(tty_fd, data, size);
 }
 int USARTCommunication::read(unsigned char *buffer, size_t buffersize){
-    //todo
+    //read(tty_fd, *buffer, buffersize);
+    return 0;
 }
 
 
