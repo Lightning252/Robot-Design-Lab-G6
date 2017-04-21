@@ -5,11 +5,12 @@
 #include <iostream>
 #include <stdexcept>
 #include <termios.h>
+#include <string.h>
+#include <unistd.h>
+#include <stdio.h>
 
-
-void USARTCommunication_start(){
-    
-    int tty_fd=open("/dev/ttyUSB0", O_RDWR | O_NONBLOCK);
+USARTCommunication::USARTCommunication(){
+    this->tty_fd=open("/dev/ttyUSB0", O_RDWR | O_NONBLOCK);
     if(tty_fd < 0)
         throw std::runtime_error("Error opening tty");
 
@@ -26,5 +27,13 @@ void USARTCommunication_start(){
     cfsetospeed(&tio,B921600);
     cfsetispeed(&tio,B921600);
     tcsetattr(tty_fd,TCSANOW,&tio);
-    
 }
+
+int USARTCommunication::write(unsigned char *data, size_t size){
+    return ::write(tty_fd, data, size);
+}
+int USARTCommunication::read(unsigned char *buffer, size_t buffersize){
+    return ::read(tty_fd, buffer, buffersize);
+}
+
+
