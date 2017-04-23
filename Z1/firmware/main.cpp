@@ -60,12 +60,9 @@ int main()
 }
 
 void toll(){
-    /*
- 	char *data;
-	data = "Gruppe X ist toll";
-	printf(data);
-	USART1_SendData(data, sizeof "Gruppe X ist toll");
-    */
+	printf("Gruppe X ist toll");
+	USART1_SendData((const unsigned char*)"Gruppe X ist toll", sizeof "Gruppe X ist toll");
+    
 }
 
 
