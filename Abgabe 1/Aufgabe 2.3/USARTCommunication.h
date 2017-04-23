@@ -7,8 +7,8 @@
 class USARTCommunication : Communication{
     public:
         USARTCommunication();
-        virtual int cwrite(unsigned char *data, size_t size);
-        virtual int cread(unsigned char *buffer, size_t buffersize);
+        virtual int write(unsigned char *data, size_t size);
+        virtual int read(unsigned char *buffer, size_t buffersize);
     private:
         int tty_fd;
 };

@@ -29,11 +29,11 @@ USARTCommunication::USARTCommunication(){
     tcsetattr(tty_fd,TCSANOW,&tio);
 }
 
-int USARTCommunication::cwrite(unsigned char *data, size_t size){
-    return write(tty_fd, data, size);
+int USARTCommunication::write(unsigned char *data, size_t size){
+    return ::write(tty_fd, data, size);
 }
-int USARTCommunication::cread(unsigned char *buffer, size_t buffersize){
-    return read(tty_fd, buffer, buffersize);
+int USARTCommunication::read(unsigned char *buffer, size_t buffersize){
+    return ::read(tty_fd, buffer, buffersize);
 }
 
 

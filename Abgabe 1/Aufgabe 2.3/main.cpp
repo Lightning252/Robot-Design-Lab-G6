@@ -3,5 +3,7 @@
 int main()
 {
 	USARTCommunication com;
-    //com.cwrite("TEST", 5);
+    unsigned char ta[] = "test";
+    unsigned char* t = ta;
+    com.write(t, 5);
 }
