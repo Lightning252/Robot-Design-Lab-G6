@@ -28,7 +28,17 @@ int main()
     printf("Robot Firmware is alive\n");
 
     //test assert failure 
-    failure();
+        GPIO_InitTypeDef GPIO_InitStructure;
+        //get default GPIO config
+        GPIO_StructInit(&GPIO_InitStructure);
+
+        RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+        //LED (PA12)
+        //configure as Push Pull
+        GPIO_InitStructure.GPIO_Pin = GPIO_Pin_All;
+        GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+        GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+        GPIO_Init(GPIOA, &GPIO_InitStructure);
     //end
     volatile uint32_t delay;
 
@@ -64,17 +74,3 @@ void toll(){
     
 }
 
-
-void failure(){
-    GPIO_InitTypeDef GPIO_InitStructure;
-    //get default GPIO config
-    GPIO_StructInit(&GPIO_InitStructure);
-
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
-    //LED (PA12)
-    //configure as Push Pull
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_All;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOA, &GPIO_InitStructure);
-}
