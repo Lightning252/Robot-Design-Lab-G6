@@ -5,26 +5,23 @@
 #include <string.h>
 #include "protocol.hpp"
 #include <iostream>
-/*
-int main(int argc, char **argv)
-{
-    listen();
-}
-*/
-void listen(){
-    unsigned char buffer[1024]; 
-    int i = USART2_GetData(buffer, 1024); 
-    unsigned char text[i]; 
-    for(int y = 0; y < i; y++){ 
-      text[y] = buffer[y]; 
+
+
+void listenUSART(){
+      unsigned char buffer[1024]; 
+      int i = USART2_GetData(buffer, 1024);
+      if(i > 0){ 
+      unsigned char text[i]; 
+      for(int y = 0; y < i; y++){ 
+            text[y] = buffer[y]; 
+      }
+      parseBuffer(text, i);
     }
-    parseBuffer(buffer, i);
 }
 
 void parseBuffer(unsigned char buffer[], unsigned int buffer_length){
    char parse[buffer_length];
-   //strcpy(buffer,(const char *)buffer);
-   for(int i = 0; i < buffer_length;i++){ 
+   for(unsigned int i = 0; i < buffer_length;i++){ 
       parse[i] = buffer[i];
       if(strstr(parse,"LED AN")){
 	printf("LED AN \n");
