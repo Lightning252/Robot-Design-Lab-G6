@@ -5,6 +5,10 @@
 #include <stdint.h>
 #include "led.hpp"
 
+//failure includes
+#include "inc/stm32f10x_gpio.h"
+#include "inc/stm32f10x_rcc.h"
+
 int main()
 {
     //enum USART_MODE test;
