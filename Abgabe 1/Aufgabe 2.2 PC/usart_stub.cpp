@@ -33,4 +33,5 @@ signed int USART2_SendData(const unsigned char *data, const unsigned int size){
 		printf("Fehler beim Schreiben der Datei!");
 		return -1;
 	}
+	return save;
 }
