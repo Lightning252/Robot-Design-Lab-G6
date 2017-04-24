@@ -5,6 +5,10 @@
 #include <stdint.h>
 #include "led.hpp"
 
+//failure includes
+#include "inc/stm32f10x_gpio.h"
+#include "inc/stm32f10x_rcc.h"
+
 int main()
 {
     //enum USART_MODE test;
@@ -23,16 +27,21 @@ int main()
 
     printf("Robot Firmware is alive\n");
 
+    //test assert failure 
+        GPIO_InitTypeDef GPIO_InitStructure;
+        //get default GPIO config
+        GPIO_StructInit(&GPIO_InitStructure);
 
+        RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+        //LED (PA12)
+        //configure as Push Pull
+        GPIO_InitStructure.GPIO_Pin = GPIO_Pin_All;
+        GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+        GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+        GPIO_Init(GPIOA, &GPIO_InitStructure);
+    //end
     volatile uint32_t delay;
 
-    /*
-        Begin - Aufgabe 2.3
-    */
- //   USARTCommunication_start();
-    /*
-        End - Aufgabe 2.3
-    */
     while(1)
     {
         delay = 5000000;
@@ -64,5 +73,4 @@ void toll(){
 	USART1_SendData((const unsigned char*)"Gruppe X ist toll", sizeof "Gruppe X ist toll");
     
 }
-
 
