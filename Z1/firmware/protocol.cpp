@@ -5,12 +5,12 @@
 #include <string.h>
 #include "protocol.hpp"
 #include <iostream>
-
+/*
 int main(int argc, char **argv)
 {
     listen();
 }
-
+*/
 void listen(){
     unsigned char buffer[1024]; 
     int i = USART2_GetData(buffer, 1024); 
