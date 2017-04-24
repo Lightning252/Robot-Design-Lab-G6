@@ -95,6 +95,7 @@ add_executable(main
     led.cpp
     drivers/syscalls.c
     stm32_specific.c
+    protocol.cpp
 )
 
 target_link_libraries(main stm32fw stm32drivers stm32fw m gcc)
