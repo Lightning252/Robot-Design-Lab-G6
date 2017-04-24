@@ -15,17 +15,17 @@ void listen(){
     unsigned char buffer[5000];
     unsigned int completeSize =0;
    //int size = USART2_GetData(buffer, 50000);
-buffer[0] = 'U'; 
-buffer[1] = 'L'; 
-buffer[2] = 'E'; 
-buffer[3] = 'D'; 
-buffer[4] = ' '; 
-buffer[5] = 'L'; 
-buffer[6] = 'E'; 
-buffer[7] = 'D'; 	
-buffer[8] = ' ';
-buffer[9] = 'A';
-buffer[10] = 'N';
+buffer[0] = 'E'; 
+buffer[1] = 'I'; 
+buffer[2] = 'N'; 
+buffer[3] = ' '; 
+buffer[4] = 'A'; 
+buffer[5] = 'U'; 
+buffer[6] = 'S'; 
+buffer[7] = ' '; 	
+buffer[8] = 'L';
+buffer[9] = 'E';
+buffer[10] = 'D';
 buffer[11] = 'L';
 buffer[12] = 'E';
 buffer[13] = 'D';
@@ -33,7 +33,11 @@ buffer[14] = ' ';
 buffer[15] = 'A';
 buffer[16] = 'U';
 buffer[17] = 'S';
-buffer[18] = 'N';
+//buffer[18] = '';
+//alex@alex-VirtualBox:~/Documents/DesignLabGit/Robot-Design-Lab-G6/Z1/firmware$ g++ protocol.cpp protocol.hpp
+//alex@alex-VirtualBox:~/Documents/DesignLabGit/Robot-Design-Lab-G6/Z1/firmware$ ./a.out
+//LED AUSalex@alex-VirtualBox:~/Documents/DesignLabGit/Robot-Design-Lab-G6/Z1/firmware$ ^C
+
 
 int  size = 19;
 parseBuffer(buffer, size);
