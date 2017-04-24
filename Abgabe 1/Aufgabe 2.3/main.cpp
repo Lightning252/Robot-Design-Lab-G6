@@ -3,7 +3,7 @@
 int main()
 {
 	USARTCommunication com;
-    unsigned char ta[] = "test";
+    unsigned char ta[] = "echo \"hallo\"";
     unsigned char* t = ta;
-    com.write(t, 5);
+    com.write(t, sizeof(ta));
 }
