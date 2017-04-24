@@ -34,7 +34,7 @@ int main()
 
     while(1)
     {
-        listen();
+        listenUSART();
         delay = 5000000;
         while(delay--);
         printf("Alive\n");
