@@ -2,8 +2,14 @@
 
 Pattern patterns[4];
 
-//adds a new tuple
+//adds a new tuple to a trajectory in a pattern
+//returns 0 on success
+//returns -1 if pattern id, servo id or time are invalid
+//returns -2 if there already is a tuple for that tiem
 int add_tuple(int pattern_id, int servo_id, int time, int angle){
+	if(pattern_id<0||pattern_id>3||servo_id<0||servo_id>7||time<0){
+		return -1;
+	}
 	if(time==0){
 		patterns[pattern_id].servos[servo_id].values[0][0]=0;
 		patterns[pattern_id].servos[servo_id].values[0][1]=angle;	
@@ -11,18 +17,21 @@ int add_tuple(int pattern_id, int servo_id, int time, int angle){
 	}	
 	for (int i=1; i<10; i++){
 		if(patterns[pattern_id].servos[servo_id].values[i][0]==time){
-			return -1;
+			return -2;
 		} else if(patterns[pattern_id].servos[servo_id].values[i][0]==0){
 			patterns[pattern_id].servos[servo_id].values[i][0]=time;
 			patterns[pattern_id].servos[servo_id].values[i][1]=angle;	
 			return 0;
 		}
 	}
-	return -2;
+	return -1;
 }
 
 //looks up at what angle the servo should be at the given time
 int get_angle(int pattern_id, int servo_id, int time){
+	if(pattern_id<0||pattern_id>3||servo_id<0||servo_id>7||time<0){
+		return -1;
+	}
 	Trajectory t=patterns[pattern_id].servos[servo_id];
 	for (int i=0; i<10; i++){
 		if(t.values[i][0]==time){
