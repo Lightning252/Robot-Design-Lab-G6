@@ -6,6 +6,7 @@
 #include <stdlib.h> 
 using namespace std;
 
+/*
 int main(int argc, char **argv)
 {
 unsigned char *buffer;
@@ -27,7 +28,7 @@ buffer = (unsigned char*) malloc (sizeof (char) * 7);
     free(buffer);
     return 0;
 }
-
+*/
 PCCommunication::PCCommunication(){
 }
 
