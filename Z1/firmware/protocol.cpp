@@ -13,7 +13,6 @@ listen();
 
 void listen(){
     unsigned char buffer[5000];
-    unsigned int completeSize =0;
    //int size = USART2_GetData(buffer, 50000);
 buffer[0] = 'E'; 
 buffer[1] = 'I'; 
