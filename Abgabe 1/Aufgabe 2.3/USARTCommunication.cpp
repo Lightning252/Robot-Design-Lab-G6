@@ -10,7 +10,7 @@
 #include <stdio.h>
 
 USARTCommunication::USARTCommunication(){
-    this->tty_fd=open("/dev/ttyUSB0", O_RDWR | O_NONBLOCK);
+    this->tty_fd=open("/dev/ttyUSB1", O_RDWR | O_NONBLOCK);
     if(tty_fd < 0)
         throw std::runtime_error("Error opening tty");
 
