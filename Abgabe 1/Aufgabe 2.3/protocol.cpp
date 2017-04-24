@@ -34,7 +34,8 @@ bool magicwordReceived = false;
 void receive(unsigned char text[]){
     unsigned char package[PACKAGESIZE];     
     unsigned char payload[PAYLOADSIZE];
-    
+    USARTCommunication com;
+    com.read(package, PACKAGESIZE);
     extractPayload(package, payload);
     unsigned char checksum[CHECKSUMSIZE];
     extractChecksum(package, checksum);
@@ -46,6 +47,7 @@ void receive(unsigned char text[]){
         text = payload;
     }
 }
+
 
 bool checkChecksum(unsigned char payload[], unsigned char checksum[]){
     crc c = crcSlow(payload, sizeof((unsigned char *)payload));
