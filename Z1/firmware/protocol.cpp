@@ -5,11 +5,10 @@
 
 void listen(){
     unsigned char buffer[20];
-    
-    for(int i = 0; i < 3; i++){
+    for(int i = 0; i < 3;i++){
         printf(buffer[i]);
     }
-
+    
     int size = USART2_GetData(buffer, 7);
     //print(func);
     if(buffer == (unsigned char*)"LED AN"){

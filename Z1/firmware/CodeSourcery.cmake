@@ -5,8 +5,8 @@ set(CMAKE_SYSTEM_VERSION   1)
 
 # which compilers to use for C and C++
 #
-set(CMAKE_C_COMPILER       arm-none-eabi-gcc "--specs=nosys.specs")
-set(CMAKE_CXX_COMPILER     arm-none-eabi-g++ "--specs=nosys.specs")
+set(CMAKE_C_COMPILER       arm-none-eabi-gcc)
+set(CMAKE_CXX_COMPILER     arm-none-eabi-g++)
 set(CMAKE_OBJDUMP          arm-none-eabi-objdump)
 #set(CMAKE_CXX_LINK_EXECUTABLE arm-none-linux-gnueabi-ld)
 #set(CMAKE_C_LINK_EXECUTABLE   arm-none-linux-gnueabi-ld)
