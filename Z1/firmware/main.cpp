@@ -48,7 +48,7 @@ int main()
 
         //turn off red led
         led_set_red(false);
-	    led_set_green(true);
+	led_set_green(true);
     }
 
     USART1_DeInit();
@@ -57,12 +57,18 @@ int main()
     return 0;
 }
 
+/*
+Gibt auf zwei verschiedene Arten 'Gruppe 6 ist toll' auf der Konsole aus 
+*/
 void toll(){
 	printf("Gruppe 6 ist toll\n");
 	USART1_SendData((const unsigned char*)"Gruppe 6 ist toll\n", sizeof ("Gruppe 6 ist toll\n"));
     
 }
 
+/*
+Sorgt mittels eines falschen Pins für die GPIO-Initialisierung für einen AssertionFailure
+*/
 void failure(){
 	GPIO_InitTypeDef GPIO_InitStructure;
     GPIO_StructInit(&GPIO_InitStructure);
