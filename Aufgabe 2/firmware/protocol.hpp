@@ -7,6 +7,10 @@
 #define MAX_PACKET_SIZE (1024 + sizeof(struct ProtocolHeader))
 #define MAGIC_BYTE 0x3f
 
+enum PROTOCOL_IDS{
+    ID_MIRROR_TEST = 1,
+};
+
 /**
  * This is a structure that defines the header of 
  * our protocol. 
@@ -15,6 +19,7 @@
  * */
 struct ProtocolHeader
 {
+    enum PROTOCOL_IDS packetId : 64;
     ///A magic byte used to find the beginning of an new packet
     unsigned char magicByte;
     ///The size in bytes of the payload
@@ -49,7 +54,7 @@ void protocol_init(send_func_t sendFunction, recv_func_t receiveFunction);
  * block until the whole packet is received and return the packet.
  * Will return 0 if no packet can be received.
  */
-signed int protocol_receiveData(unsigned char* data, uint16_t *dataSize, short unsigned int maxBufferSize);
+signed int protocol_receiveData(unsigned char* data, uint16_t *dataSize, short unsigned int maxBufferSize, uint64_t *id);
 
 /**
  * Calculates a CRC over the given array of bytes
@@ -66,5 +71,6 @@ unsigned short protocol_calculateCRC(const unsigned char *data, unsigned short s
  * */
 void protocol_sendData(const unsigned char *data, unsigned short size);
 
+void protocol_registerFunc(void (*handler)(enum PROTOCOL_IDS id, unsigned char *data, unsigned short size));
 
 #endif

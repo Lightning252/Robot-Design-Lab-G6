@@ -27,10 +27,11 @@ int main()
     unsigned char buffer[bufferSize];
 
     uint16_t received = 0;
+    uint64_t id = 0;
     int gotPacket = 0;
     while(1)
     {
-      if((gotPacket = protocol_receiveData(buffer, &received, bufferSize)) > 0)
+      if((gotPacket = protocol_receiveData(buffer, &received, bufferSize, &id)) > 0)
         {
             printf("Got Data, size %i\n", received);
             printf("Sending it back\n");

@@ -84,7 +84,7 @@ struct ProtocolHeader *protocol_receiveHeader()
     return 0;
 };
 
-signed int protocol_receiveData(unsigned char* data, uint16_t* dataSize, short unsigned int maxBufferSize)
+signed int protocol_receiveData(unsigned char* data, uint16_t* dataSize, short unsigned int maxBufferSize, uint64_t *id)
 {
     struct ProtocolHeader *header;
     int received = 0;    
@@ -147,7 +147,7 @@ signed int protocol_receiveData(unsigned char* data, uint16_t* dataSize, short u
         }
         
 //         printf("Got cpmlete packet \n");
-        
+        *id = header->packetId;
         *dataSize =  header->payloadSize;
         return 1;
    }
@@ -198,6 +198,10 @@ void protocol_sendData(const unsigned char* data, short unsigned int size)
 	    sent += ret;
     }
     
+}
+
+void protocol_registerFunc(void (*handler)(enum PROTOCOL_IDS id, unsigned char *data, unsigned short size)){
+	
 }
 
 
