@@ -5,13 +5,13 @@
 
 
 ### done:
-
+- 3 Aufgabe\ 2/firmware/protocol - Leon
 
 ### todo:
 
 - 1
 - 2
-- 3 Leon (ongoing)
+
 - 4
 
 

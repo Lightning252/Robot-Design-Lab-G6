@@ -7,8 +7,15 @@
 #define MAX_PACKET_SIZE (1024 + sizeof(struct ProtocolHeader))
 #define MAGIC_BYTE 0x3f
 
+#define funcSignature void (*handler)(enum PROTOCOL_IDS id, unsigned char *data, unsigned short size)
+#define BUFFERSIZE 1024
+
+/**
+ * Package types
+ **/
 enum PROTOCOL_IDS{
-    ID_MIRROR_TEST = 1,
+    ID_MIRROR_TEST,
+    PROTOCOL_IDS_SIZE
 };
 
 /**
@@ -71,6 +78,17 @@ unsigned short protocol_calculateCRC(const unsigned char *data, unsigned short s
  * */
 void protocol_sendData(const unsigned char *data, unsigned short size);
 
-void protocol_registerFunc(void (*handler)(enum PROTOCOL_IDS id, unsigned char *data, unsigned short size));
+/**
+ * Maps a function for specific id
+ * @arg the id where the function will be mapped
+ * @arg the function that will mapped
+ **/
+void protocol_registerFunc(unsigned int protocolId, funcSignature);
 
+/**
+ * Receives a packages and executes the mapped function for the id
+ **/
+void protocol_processData();
+
+//void (*handler)(enum PROTOCOL_IDS id, unsigned char *data, unsigned short size) functions[3];
 #endif

@@ -9,6 +9,8 @@ unsigned int receivedHeaderBytes = 0;
 send_func_t protocol_sendFunction;
 recv_func_t protocol_recvFunction;
 
+void (*funcMapping[PROTOCOL_IDS_SIZE])(enum PROTOCOL_IDS id, unsigned char *data, unsigned short size);
+
 void protocol_init(send_func_t sendFunction, recv_func_t receiveFunction)
 {
     receivedHeaderBytes = 0;
@@ -200,8 +202,25 @@ void protocol_sendData(const unsigned char* data, short unsigned int size)
     
 }
 
-void protocol_registerFunc(void (*handler)(enum PROTOCOL_IDS id, unsigned char *data, unsigned short size)){
-	
+void protocol_registerFunc(unsigned int protocolId, funcSignature){
+	if(PROTOCOL_IDS_SIZE > protocolId){
+		funcMapping[protocolId] = handler;
+	}
+	else{
+		printf("Error, not able to register function");
+	}
+}
+
+void protocol_processData(){
+    unsigned char buffer[BUFFERSIZE];
+    uint16_t received = 0;
+    uint64_t id = 0;
+    int gotPacket = 0;
+
+	if((gotPacket = protocol_receiveData(buffer, &received, BUFFERSIZE, &id)) > 0){
+		printf("package received");
+		funcMapping[id](static_cast<PROTOCOL_IDS>(id), buffer, BUFFERSIZE);
+	}
 }
 
 
