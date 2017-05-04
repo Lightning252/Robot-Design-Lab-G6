@@ -1,6 +1,6 @@
 #include "ComProtocol.hpp"
 #include "UARTCommunication.hpp"
-//#include "CommunicationStub.hpp"
+#include "CommunicationStub.hpp"
 #include <string.h>
 #include <iostream>
 
@@ -24,44 +24,13 @@ void initStep(struct Step &step)
     
 }
 
-
-int main(int argc, char** argv)
-{
-    Step* step = new Step();
-    memset(&step, 0, sizeof(Step));
-    step->length = 500;
-    for(int i = 0; i < NUM_SERVOS; i++)
-    {
-	step->servoTrajectory[i].size = 13;
-
-	for(int j = 0; j < 12; j++)
-	{
-	    step->servoTrajectory[i].data[j].time = 10 + j * 20;
-	    step->servoTrajectory[i].data[j].angle = 15 + j * 150;
-	}
-	step->servoTrajectory[i].data[12].time = 10 + 20 * 20;
-	step->servoTrajectory[i].data[12].angle = 15;
-    }
-
-    Communication* com = new UARTCommunication("1");
-    ComProtocol *proto = ComProtocol::getInstance(com);
-
-    const int bufSize = 200;
-    std::vector<uint8_t> data;
-    data.resize(sizeof(Step));
-    memcpy(data.data(), step, data.size());
-    std::cout << "Sending test data" <<std::endl;
-    proto->sendData(data);
-
-}
-
 void readPrintfs(Communication* com)
 {
     unsigned char buf;
     while(com->read(&buf, sizeof(char)))
 	std::cout << buf << std::flush;
 }
-/*
+
 int main(int argc, char** argv)
 {
     if(argc < 1 || argc > 3)
@@ -140,4 +109,4 @@ int main(int argc, char** argv)
     
     return 0;
 }
-*/
+
