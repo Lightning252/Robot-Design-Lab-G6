@@ -6,6 +6,10 @@
 #include "led.hpp"
 #include "protocol.hpp"
 
+void testFunction(enum PROTOCOL_IDS id, unsigned char *data, unsigned short size){
+    Step* step = (Step*)data;
+}
+
 int main()
 {
     Assert_Configuration();
@@ -29,15 +33,11 @@ int main()
     uint16_t received = 0;
     uint64_t id = 0;
     int gotPacket = 0;
+
+    protocol_registerFunc(ID_STEP, testFunction); 
     while(1)
     {
-      if((gotPacket = protocol_receiveData(buffer, &received, bufferSize, &id)) > 0)
-        {
-            printf("Got Data, size %i\n", received);
-            printf("Sending it back\n");
-            protocol_sendData(buffer, received);
-        }
-
+        protocol_processData();
     }
 
     USART1_DeInit();

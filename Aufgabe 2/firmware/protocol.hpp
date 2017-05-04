@@ -15,6 +15,7 @@
  **/
 enum PROTOCOL_IDS{
     ID_MIRROR_TEST,
+    ID_STEP,
     PROTOCOL_IDS_SIZE
 };
 
