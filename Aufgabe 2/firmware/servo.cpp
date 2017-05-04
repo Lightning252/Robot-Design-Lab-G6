@@ -118,6 +118,11 @@ TIM_BDTRConfig (TIM4, &bdtr);*/
 
 //connect channels to GPIO -> PA6, PA7, PB0, PB1, PB6, PB7, PB8, PB9 ?
 
+/**
+void TIM_DMACmd(TIM_TypeDef* TIMx, u16 TIM_DMASource, FunctionalState NewState);
+void TIM_CtrlPWMOutputs(TIM_TypeDef* TIMx, FunctionalState NewState);
+*/
+
 // Start the timer
 TIM_Cmd (TIM3, ENABLE);
 TIM_Cmd (TIM4, ENABLE);
