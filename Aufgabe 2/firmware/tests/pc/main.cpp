@@ -24,13 +24,56 @@ void initStep(struct Step &step)
     
 }
 
+int main(int argc, char** argv)
+{
+    Step* step = new Step();
+    memset(step, 0, sizeof(Step));
+
+    step->length = 500;
+    for(int i = 0; i < NUM_SERVOS; i++)
+    {
+	step->servoTrajectory[i].size = 13;
+
+	for(int j = 0; j < 12; j++)
+	{
+	    step->servoTrajectory[i].data[j].time = 10 + j * 20;
+	    step->servoTrajectory[i].data[j].angle = 15 + j * 150;
+	}
+	step->servoTrajectory[i].data[12].time = 10 + 20 * 20;
+	step->servoTrajectory[i].data[12].angle = 15;
+    }
+
+    Communication* com = new UARTCommunication("/dev/ttyUSB1");
+    ComProtocol *proto = ComProtocol::getInstance(com);
+    
+    //test ID_STEP
+    const int bufSize = 200;
+    std::vector<uint8_t> data;
+    data.resize(sizeof(Step));
+    memcpy(data.data(), step, data.size());
+    std::cout << "Sending test data" <<std::endl;
+    proto->sendData(data, ID_STEP);
+
+    //test ID_TEST
+    const int bufSizeTest = 200;
+    std::vector<uint8_t> dataTest;
+    data.resize(bufSizeTest);
+    
+    for(int i = 0; i < bufSizeTest; i++)
+    {
+        dataTest[i] = i;
+    }
+    std::cout << "Sending test data" <<std::endl;
+    proto->sendData(dataTest, ID_TEST);
+}
+
 void readPrintfs(Communication* com)
 {
     unsigned char buf;
     while(com->read(&buf, sizeof(char)))
 	std::cout << buf << std::flush;
 }
-
+/*
 int main(int argc, char** argv)
 {
     if(argc < 1 || argc > 3)
@@ -109,4 +152,4 @@ int main(int argc, char** argv)
     
     return 0;
 }
-
+*/

@@ -14,7 +14,8 @@
  * Package types
  **/
 enum PROTOCOL_IDS{
-    ID_MIRROR_TEST,
+    ID_TEST,
+    ID_STEP,
     PROTOCOL_IDS_SIZE
 };
 
@@ -26,9 +27,10 @@ enum PROTOCOL_IDS{
  * */
 struct ProtocolHeader
 {
-    enum PROTOCOL_IDS packetId : 64;
     ///A magic byte used to find the beginning of an new packet
     unsigned char magicByte;
+    ///Set the package type
+    enum PROTOCOL_IDS packetId : 8;
     ///The size in bytes of the payload
     unsigned short payloadSize;
     ///A checksum of the payload. This is used to find 
@@ -61,7 +63,7 @@ void protocol_init(send_func_t sendFunction, recv_func_t receiveFunction);
  * block until the whole packet is received and return the packet.
  * Will return 0 if no packet can be received.
  */
-signed int protocol_receiveData(unsigned char* data, uint16_t *dataSize, short unsigned int maxBufferSize, uint64_t *id);
+signed int protocol_receiveData(unsigned char* data, uint16_t *dataSize, short unsigned int maxBufferSize, uint64_t *type);
 
 /**
  * Calculates a CRC over the given array of bytes
@@ -75,8 +77,9 @@ unsigned short protocol_calculateCRC(const unsigned char *data, unsigned short s
  * Sends the given data using the given id.
  * @arg data A pointer to the data to be send
  * @arg size Size of the data to be send 
+ * @arg type of package to send
  * */
-void protocol_sendData(const unsigned char *data, unsigned short size);
+void protocol_sendData(const unsigned char *data, unsigned short size, enum PROTOCOL_IDS type);
 
 /**
  * Maps a function for specific id

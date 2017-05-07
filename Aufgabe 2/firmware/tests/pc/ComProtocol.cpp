@@ -35,18 +35,18 @@ int ComProtocol::write(const unsigned char* data, unsigned int size)
     return singletonVar->com->write(data, size);
 }
  
-void ComProtocol::sendData(const std::vector< uint8_t > data)
+void ComProtocol::sendData(const std::vector< uint8_t > data, enum PROTOCOL_IDS type)
 {
-    protocol_sendData(data.data(), data.size());
+    protocol_sendData(data.data(), data.size(), type);
 }
 
-bool ComProtocol::getData(std::vector< uint8_t >& data)
+bool ComProtocol::getData(std::vector< uint8_t >& data, uint64_t *type)
 {
     const size_t maxBufferSize = MAX_PACKET_SIZE;
     if(data.size() < maxBufferSize)
         data.resize(maxBufferSize);
     uint16_t receivedBytes;
-    int gotPacket = protocol_receiveData(data.data(), &receivedBytes, data.size());
+    int gotPacket = protocol_receiveData(data.data(), &receivedBytes, data.size(), type);
     if(gotPacket)
     {
         data.resize(receivedBytes);

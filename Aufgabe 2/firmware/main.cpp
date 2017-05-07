@@ -6,6 +6,20 @@
 #include "led.hpp"
 #include "protocol.hpp"
 
+Step* moveStack[10];
+
+void stepFunction(enum PROTOCOL_IDS id, unsigned char *data, unsigned short size){
+    printf("this is the stepFunction");
+    moveStack[0] = (Step*)data;
+}
+
+void testFunction(enum PROTOCOL_IDS id, unsigned char *data, unsigned short size){
+    printf("this is the testFunction");
+}
+
+void failFunction(enum PROTOCOL_IDS id, unsigned char *data, unsigned short size){
+    printf("this should never be printed");
+}
 int main()
 {
     Assert_Configuration();
@@ -23,21 +37,13 @@ int main()
 
     protocol_init(USART2_SendData, USART2_GetData);
 
-    const int bufferSize = 1024;
-    unsigned char buffer[bufferSize];
-
-    uint16_t received = 0;
-    uint64_t id = 0;
-    int gotPacket = 0;
+    protocol_registerFunc(ID_TEST, testFunction);
+    protocol_registerFunc(ID_STEP, stepFunction); 
+    //should fail
+    protocol_registerFunc(PROTOCOL_IDS_SIZE, failFunction); 
     while(1)
     {
-      if((gotPacket = protocol_receiveData(buffer, &received, bufferSize, &id)) > 0)
-        {
-            printf("Got Data, size %i\n", received);
-            printf("Sending it back\n");
-            protocol_sendData(buffer, received);
-        }
-
+        protocol_processData();
     }
 
     USART1_DeInit();

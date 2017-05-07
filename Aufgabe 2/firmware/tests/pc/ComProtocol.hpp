@@ -17,8 +17,8 @@ private:
 public:
     static ComProtocol *getInstance(class Communication *com);
     ~ComProtocol();
-    void sendData(const std::vector<uint8_t> data);
-    bool getData(std::vector<uint8_t> &data);
+    void sendData(const std::vector<uint8_t> data, enum PROTOCOL_IDS type);
+    bool getData(std::vector<uint8_t> &data, uint64_t *type);
 };
 
 #endif // COMPROTOCOL_HPP
