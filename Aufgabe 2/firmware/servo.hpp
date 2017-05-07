@@ -27,4 +27,8 @@ void servo_setAngle(enum Servos servo, int value);
  * */
 void servo_init();
 
+void overruntest();
+
+void cameraclock();
+
 #endif

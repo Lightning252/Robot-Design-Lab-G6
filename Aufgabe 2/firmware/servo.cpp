@@ -61,7 +61,7 @@ break;
 void servo_init(){
 TIM_TimeBaseInitTypeDef timBase;
 TIM_TimeBaseStructInit (&timBase);
-timBase.TIM_Prescaler = 22
+timBase.TIM_Prescaler = 22;
 timBase.TIM_ClockDivision = TIM_CKD_DIV1; //?
 timBase.TIM_CounterMode = TIM_CounterMode_Up; //?
 timBase.TIM_Period = 65455;
@@ -109,7 +109,7 @@ TIM_OC4PreloadConfig (TIM4, TIM_OCPreload_Enable);
 //connect channels to GPIO -> PA6, PA7, PB0, PB1, PB6, PB7, PB8, PB9 ?
 GPIO_InitTypeDef gpioStructure;
 GPIO_StructInit(&gpioStructure);
-gpioStructure.GPIO_Pin = GPIO_Pin_22;
+gpioStructure.GPIO_Pin = GPIO_Pin_6;
 //gpioStructure.GPIO_Mode = GPIO_Mode_AF_PP; //?
 gpioStructure.GPIO_Speed = GPIO_Speed_50MHz;
 GPIO_Init(GPIOA,&gpioStructure); 
@@ -118,6 +118,15 @@ GPIO_Init(GPIOA,&gpioStructure);
 TIM_Cmd (TIM3, ENABLE);
 TIM_Cmd (TIM4, ENABLE);
 }
+
+void overruntest(){
+
+}
+
+void cameraclock(){
+
+}
+
 
 
 
