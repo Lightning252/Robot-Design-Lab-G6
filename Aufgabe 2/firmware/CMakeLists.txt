@@ -94,6 +94,7 @@ add_executable(main
     led.cpp
     engine.cpp
     protocol.cpp
+	servo.cpp
     crc.c
     drivers/syscalls.c
     stm32_specific.c
