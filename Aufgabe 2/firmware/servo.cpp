@@ -82,16 +82,16 @@ oc.TIM_OutputState = TIM_OutputState_Enable; //?
 oc.TIM_Pulse = 0; 
 
 TIM_OC1Init (TIM3, &oc);
-TIM_OC1PreloadConfig (TIM4, TIM_OCPreload_Enable);
+TIM_OC1PreloadConfig (TIM3, TIM_OCPreload_Enable);
 
 TIM_OC2Init (TIM3, &oc);
-TIM_OC2PreloadConfig (TIM4, TIM_OCPreload_Enable);
+TIM_OC2PreloadConfig (TIM3, TIM_OCPreload_Enable);
 
 TIM_OC3Init (TIM3, &oc);
-TIM_OC3PreloadConfig (TIM4, TIM_OCPreload_Enable);
+TIM_OC3PreloadConfig (TIM3, TIM_OCPreload_Enable);
 
 TIM_OC4Init (TIM3, &oc);
-TIM_OC4PreloadConfig (TIM4, TIM_OCPreload_Enable);
+TIM_OC4PreloadConfig (TIM3, TIM_OCPreload_Enable);
 
 TIM_OC1Init (TIM4, &oc);
 TIM_OC1PreloadConfig (TIM4, TIM_OCPreload_Enable);
@@ -120,11 +120,55 @@ TIM_Cmd (TIM4, ENABLE);
 }
 
 void overruntest(){
+	//prescaler, periode, pulse anpassen! Zähler?
 
+	TIM_TimeBaseInitTypeDef timBase;
+	TIM_TimeBaseStructInit(&timBase);
+	timBase.TIM_Prescaler = 22;
+	timBase.TIM_ClockDivision = TIM_CKD_DIV1; //?
+	timBase.TIM_CounterMode = TIM_CounterMode_Up; //?
+	timBase.TIM_Period = 65455;
+	TIM_TimeBaseInit(TIM3, &timBase);
+
+	TIM_OCInitTypeDef oc;
+	TIM_OCStructInit(&oc);
+
+	oc.TIM_OCMode = TIM_OCMode_PWM1; //?
+	oc.TIM_OCPolarity = TIM_OCPolarity_High; //?
+	oc.TIM_OutputState = TIM_OutputState_Enable; //?
+	oc.TIM_Pulse = 0;
+
+	TIM_OC1Init(TIM3, &oc);
+	TIM_OC1PreloadConfig(TIM3, TIM_OCPreload_Enable);
+
+	TIM_Cmd(TIM3, ENABLE);
 }
 
 void cameraclock(){
+	//how to TIM1?
 
+	TIM_TimeBaseInitTypeDef timBase;
+	TIM_TimeBaseStructInit(&timBase);
+	timBase.TIM_Prescaler = 22;
+	timBase.TIM_ClockDivision = TIM_CKD_DIV1; //?
+	timBase.TIM_CounterMode = TIM_CounterMode_Up; //?
+	timBase.TIM_Period = 65455;
+	TIM_TimeBaseInit(TI1, &timBase);
+
+	TIM_OCInitTypeDef oc;
+	TIM_OCStructInit(&oc);
+
+	oc.TIM_OCMode = TIM_OCMode_PWM1; //?
+	oc.TIM_OCPolarity = TIM_OCPolarity_High; //?
+	oc.TIM_OutputState = TIM_OutputState_Enable; //?
+	oc.TIM_Pulse = 0;
+
+	TIM_OC1Init(TIM1, &oc);
+	TIM_OC1PreloadConfig(TIM1, TIM_OCPreload_Enable);
+
+	TIM_Cmd(TIM, ENABLE);
+	//void TIM_DMACmd(TIM_TypeDef* TIMx, u16 TIM_DMASource, FunctionalState NewState);
+	//void TIM_CtrlPWMOutputs(TIM_TypeDef* TIMx, FunctionalState NewState);
 }
 
 
