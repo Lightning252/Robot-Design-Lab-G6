@@ -29,13 +29,13 @@ struct ProtocolHeader
 {
     ///A magic byte used to find the beginning of an new packet
     unsigned char magicByte;
-    ///Set the package type
-    enum PROTOCOL_IDS packetId : 8;
     ///The size in bytes of the payload
     unsigned short payloadSize;
     ///A checksum of the payload. This is used to find 
     ///transmission errors
     unsigned short payloadCRC;
+      ///Set the package type
+    enum PROTOCOL_IDS packetId : 8;
     /**
      * The checksum of the header itself. This is used for two purposed:
      * a: detecting transmission errors

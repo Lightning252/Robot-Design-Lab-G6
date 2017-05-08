@@ -172,9 +172,9 @@ void protocol_sendData(const unsigned char* data, short unsigned int size, enum 
     
     //setup a correct header
     header.magicByte = MAGIC_BYTE;
-	header.packetId = type;
     header.payloadSize = size;
     header.payloadCRC = protocol_calculateCRC(data, size);
+	header.packetId = type;
     header.headerCRC = protocol_calculateCRC((unsigned char *) &header, sizeof(struct ProtocolHeader)- sizeof(unsigned short));
     
     //send header

@@ -92,7 +92,7 @@ signed int IPCSender::getData (unsigned char *buffer, const unsigned int buffer_
     try {
         if(!receiverQueue->try_receive(buffer, sizeof(char), received, priority))
         {
-            std::cout << "getData 0" << std::endl;
+            //std::cout << "getData 0" << std::endl;
             return 0;
         }
     } catch (interprocess_exception &ex) {
