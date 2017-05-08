@@ -20,7 +20,7 @@ void protocol_init(send_func_t sendFunction, recv_func_t receiveFunction)
 
 struct ProtocolHeader *protocol_receiveHeader()
 {
-	printf("protocol_receiveHeader start\n");
+	//printf("protocol_receiveHeader start\n");
     unsigned char *buffer = (unsigned char *) &headerInternal;
 //     printf("Rec header\n");
     while(1)
@@ -37,7 +37,7 @@ struct ProtocolHeader *protocol_receiveHeader()
         
 	//not more data there, try again later
 	if(ret == 0)
-		printf("no header protocol_recvFunction \n");
+		//printf("no header protocol_recvFunction \n");
 	    return 0;
 
 	//search for the magic byte
@@ -90,7 +90,7 @@ struct ProtocolHeader *protocol_receiveHeader()
 
 signed int protocol_receiveData(unsigned char* data, uint16_t* dataSize, short unsigned int maxBufferSize, uint64_t *type)
 {
-	printf("protocol_receiveData start\n");
+	//printf("protocol_receiveData start\n");
     struct ProtocolHeader *header;
     int received = 0;    
     while(1)
@@ -100,7 +100,7 @@ signed int protocol_receiveData(unsigned char* data, uint16_t* dataSize, short u
 	
 	//no header there
 	if(!header)
-		printf("no header protocol_receiveData\n");
+		//printf("no header protocol_receiveData\n");
 	    return 0;
 	
 //         printf("Got Header \n");
