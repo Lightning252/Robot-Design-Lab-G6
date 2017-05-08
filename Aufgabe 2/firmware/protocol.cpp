@@ -200,7 +200,7 @@ void protocol_sendData(const unsigned char* data, short unsigned int size, enum 
 	else
 	    sent += ret;
     }
-    printf("Data was sent.")
+    printf("Data was sent.");
 }
 
 void protocol_registerFunc(unsigned int protocolId, funcSignature){
