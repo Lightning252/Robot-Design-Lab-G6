@@ -59,6 +59,12 @@ break;
 }
 
 void servo_init(){
+
+RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
+RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
+RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+
 TIM_TimeBaseInitTypeDef timBase;
 TIM_TimeBaseStructInit (&timBase);
 timBase.TIM_Prescaler = 22;
@@ -66,18 +72,18 @@ timBase.TIM_ClockDivision = TIM_CKD_DIV1; //?
 timBase.TIM_CounterMode = TIM_CounterMode_Up; //?
 timBase.TIM_Period = 65455;
 TIM_TimeBaseInit (TIM3, &timBase);
-//TIM_ARRPreloadConfig (TIM3, ENABLE); //?
+TIM_ARRPreloadConfig (TIM3, ENABLE); //?
 TIM_TimeBaseInit (TIM4, &timBase);
-//TIM_ARRPreloadConfig (TIM4, ENABLE); //?
+TIM_ARRPreloadConfig (TIM4, ENABLE); //?
 
 // Output compare match
 TIM_OCInitTypeDef oc;
 TIM_OCStructInit (&oc);
 
-//oc.TIM_OCIdleState = TIM_OCIdleState_Reset;
-//oc.TIM_OCNIdleState = TIM_OCNIdleState_Set;
+oc.TIM_OCIdleState = TIM_OCIdleState_Reset;
+oc.TIM_OCNIdleState = TIM_OCNIdleState_Set;
 oc.TIM_OCMode = TIM_OCMode_PWM1; //?
-oc.TIM_OCPolarity = TIM_OCPolarity_High; //?
+oc.TIM_OCPolarity = TIM_OCPolarity_Low; //?
 oc.TIM_OutputState = TIM_OutputState_Enable; //?
 oc.TIM_Pulse = 0; 
 
@@ -133,7 +139,7 @@ GPIO_Init(GPIOB,&gpioStructure);
 TIM_Cmd (TIM3, ENABLE);
 TIM_Cmd (TIM4, ENABLE);
 }
-
+/**
 void overruntest(){
 	//prescaler, periode, pulse anpassen! Zähler?
 
@@ -168,7 +174,7 @@ void cameraclock(){
 	timBase.TIM_ClockDivision = TIM_CKD_DIV1; //?
 	timBase.TIM_CounterMode = TIM_CounterMode_Up; //?
 	timBase.TIM_Period = 65455;
-	TIM_TimeBaseInit(TI1, &timBase);
+	TIM_TimeBaseInit(TIM1, &timBase);
 
 	TIM_OCInitTypeDef oc;
 	TIM_OCStructInit(&oc);
@@ -185,7 +191,7 @@ void cameraclock(){
 	//void TIM_DMACmd(TIM_TypeDef* TIMx, u16 TIM_DMASource, FunctionalState NewState);
 	//void TIM_CtrlPWMOutputs(TIM_TypeDef* TIMx, FunctionalState NewState);
 }
-
+*/
 
 
 
