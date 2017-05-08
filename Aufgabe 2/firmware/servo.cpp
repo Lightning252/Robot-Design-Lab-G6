@@ -3,17 +3,7 @@
 #include "inc/stm32f10x_tim.h"
 #include "inc/stm32f10x_gpio.h"
 
-/**
-I/O_VCC1 FR_1 front right hip PA6
-I/O_VCC2 FR_2 front right knee PA7
-I/O_VCC3 BR_1 back right hip PB0
-I/O_VCC4 BR_2 back right knee PB1
-I/O_VCC5 BL_1 back left hip PB6
-I/O_VCC6 BL_2 back left knee PB7
-I/O_VCC7 FL_1 front left hip PB8
-I/O_VCC8 FL_2 front left knee PB9
-*/
-
+// Gibt dem angegebenen Servo das Signal sich in den angegebenen Winkel zu begeben. 
 void servo_setAngle(enum Servos servo, int value){
 if(value < 0 || value > 1700){
 return;
@@ -56,6 +46,7 @@ break;
 }
 }
 
+// Initialisiert alle Timer und Channel
 void servo_init(){
 
 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
@@ -74,7 +65,6 @@ TIM_ARRPreloadConfig (TIM3, ENABLE); //?
 TIM_TimeBaseInit (TIM4, &timBase);
 TIM_ARRPreloadConfig (TIM4, ENABLE); //?
 
-// Output compare match
 TIM_OCInitTypeDef oc;
 TIM_OCStructInit (&oc);
 
@@ -109,8 +99,6 @@ TIM_OC3PreloadConfig (TIM4, TIM_OCPreload_Enable);
 TIM_OC4Init (TIM4, &oc);
 TIM_OC4PreloadConfig (TIM4, TIM_OCPreload_Enable);
 
-
-//connect channels to GPIO -> PA6, PA7, PB0, PB1, PB6, PB7, PB8, PB9 ?
 GPIO_InitTypeDef gpioStructure;
 GPIO_StructInit(&gpioStructure);
 gpioStructure.GPIO_Mode = GPIO_Mode_AF_PP; //?
@@ -132,8 +120,6 @@ GPIO_Init(GPIOB,&gpioStructure);
 gpioStructure.GPIO_Pin = GPIO_Pin_9;
 GPIO_Init(GPIOB,&gpioStructure);
     
-
-// Start the timer
 TIM_Cmd (TIM3, ENABLE);
 TIM_Cmd (TIM4, ENABLE);
 }
