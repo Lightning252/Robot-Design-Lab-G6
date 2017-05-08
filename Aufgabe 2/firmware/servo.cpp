@@ -14,8 +14,6 @@ I/O_VCC7 FL_1 front left hip PB8
 I/O_VCC8 FL_2 front left knee PB9
 */
 
-//einmal zu Beginn initialisieren oder immer neu? https://www.mikrocontroller.net/topic/245863
-
 void servo_setAngle(enum Servos servo, int value){
 if(value < 0 || value > 1700){
 return;
@@ -164,34 +162,59 @@ void overruntest(){
 
 	TIM_Cmd(TIM3, ENABLE);
 }
-
+*/
 void cameraclock(){
-	//how to TIM1?
+
+	GPIO_InitTypeDef gpioStructure;
+	GPIO_StructInit(&gpioStructure);
+	gpioStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+	gpioStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	gpioStructure.GPIO_Pin = GPIO_Pin_6;
+	GPIO_Init(GPIOA,&gpioStructure);
+	gpioStructure.GPIO_Pin = GPIO_Pin_7;
+	GPIO_Init(GPIOA,&gpioStructure);
+	gpioStructure.GPIO_Pin = GPIO_Pin_0;
+	GPIO_Init(GPIOB,&gpioStructure);
+	gpioStructure.GPIO_Pin = GPIO_Pin_1;
+	GPIO_Init(GPIOB,&gpioStructure);
+	gpioStructure.GPIO_Pin = GPIO_Pin_6;
+	GPIO_Init(GPIOB,&gpioStructure);
+	gpioStructure.GPIO_Pin = GPIO_Pin_7;
+	GPIO_Init(GPIOB,&gpioStructure);
+	gpioStructure.GPIO_Pin = GPIO_Pin_8;
+	GPIO_Init(GPIOB,&gpioStructure);
+	gpioStructure.GPIO_Pin = GPIO_Pin_9;
+	GPIO_Init(GPIOB,&gpioStructure);
+
+	TIM_OCInitTypeDef oc;
+	TIM_OCStructInit (&oc);
+
+	oc.TIM_OCIdleState = TIM_OCIdleState_Reset;
+	oc.TIM_OCNIdleState = TIM_OCNIdleState_Set;
+	oc.TIM_OCMode = TIM_OCMode_PWM1;
+	oc.TIM_OCPolarity = TIM_OCPolarity_Low;
+	oc.TIM_OutputState = TIM_OutputState_Enable;
+	oc.TIM_Pulse = 1000; 
+
+	TIM_OC1Init (TIM1, &oc);
 
 	TIM_TimeBaseInitTypeDef timBase;
 	TIM_TimeBaseStructInit(&timBase);
+	//(Formel : 
 	timBase.TIM_Prescaler = 22;
-	timBase.TIM_ClockDivision = TIM_CKD_DIV1; //?
-	timBase.TIM_CounterMode = TIM_CounterMode_Up; //?
-	timBase.TIM_Period = 65455;
+	timBase.TIM_ClockDivision = TIM_CKD_DIV1;
+	timBase.TIM_CounterMode = TIM_CounterMode_Up;
+	timBase.TIM_Period = 2000;
 	TIM_TimeBaseInit(TIM1, &timBase);
-
-	TIM_OCInitTypeDef oc;
-	TIM_OCStructInit(&oc);
-
-	oc.TIM_OCMode = TIM_OCMode_PWM1; //?
-	oc.TIM_OCPolarity = TIM_OCPolarity_High; //?
-	oc.TIM_OutputState = TIM_OutputState_Enable; //?
-	oc.TIM_Pulse = 0;
 
 	TIM_OC1Init(TIM1, &oc);
 	TIM_OC1PreloadConfig(TIM1, TIM_OCPreload_Enable);
 
-	TIM_Cmd(TIM, ENABLE);
-	//void TIM_DMACmd(TIM_TypeDef* TIMx, u16 TIM_DMASource, FunctionalState NewState);
-	//void TIM_CtrlPWMOutputs(TIM_TypeDef* TIMx, FunctionalState NewState);
+	TIM_CtrlPWMOutputs(TIM1, ENABLE);
+	TIM_DMACmd(TIM1, TIM_DMA_CC1, ENABLE);
+	TIM_Cmd(TIM1, ENABLE);
 }
-*/
+
 
 
 
