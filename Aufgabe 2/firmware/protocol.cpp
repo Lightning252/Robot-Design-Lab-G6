@@ -20,6 +20,7 @@ void protocol_init(send_func_t sendFunction, recv_func_t receiveFunction)
 
 struct ProtocolHeader *protocol_receiveHeader()
 {
+	printf("protocol_receiveHeader start\n");
     unsigned char *buffer = (unsigned char *) &headerInternal;
 //     printf("Rec header\n");
     while(1)
@@ -82,12 +83,13 @@ struct ProtocolHeader *protocol_receiveHeader()
 	
 	return &headerInternal;
     }
-    
+    printf("protocol_receiveHeader end\n");
     return 0;
 };
 
 signed int protocol_receiveData(unsigned char* data, uint16_t* dataSize, short unsigned int maxBufferSize, uint64_t *type)
 {
+	printf("protocol_receiveData start\n");
     struct ProtocolHeader *header;
     int received = 0;    
     while(1)
