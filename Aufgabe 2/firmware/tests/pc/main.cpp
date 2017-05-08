@@ -1,5 +1,5 @@
 #include "ComProtocol.hpp"
-#include "UARTCommunication.hpp"
+//#include "UARTCommunication.hpp"
 #include "CommunicationStub.hpp"
 #include <string.h>
 #include <iostream>
@@ -43,7 +43,10 @@ int main(int argc, char** argv)
 	step->servoTrajectory[i].data[12].angle = 15;
     }
 
-    Communication* com = new UARTCommunication("/dev/ttyUSB1");
+    Communication* com;
+    IPCSender *sender = new IPCSender("to_robot_queueU2", "from_robot_queueU2");
+    com = new CommunicationStub(sender);
+    //com = new UARTCommunication("/dev/ttyUSB1");
     ComProtocol *proto = ComProtocol::getInstance(com);
     
     //test ID_STEP
