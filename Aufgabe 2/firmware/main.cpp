@@ -36,8 +36,8 @@ int main()
 
     printf("Robot Firmware is alive\n");
 
-    servo_init();
-    servo_setAngle(SERVO_FR_HIP, 0);
+    //servo_init();
+    //servo_setAngle(SERVO_FR_HIP, 0);
 
     protocol_init(USART2_SendData, USART2_GetData);
 
