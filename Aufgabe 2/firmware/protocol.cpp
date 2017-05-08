@@ -182,6 +182,7 @@ void protocol_sendData(const unsigned char* data, short unsigned int size, enum 
     while(sent < sizeof(struct ProtocolHeader))
     {
 	int ret = protocol_sendFunction(((unsigned char *) &header) + sent, sizeof(struct ProtocolHeader) - sent);
+	printf("protocol_sendFunction first")
 	if(ret < 0)
 	{
 	    printf("Error, sending failed");
@@ -196,6 +197,7 @@ void protocol_sendData(const unsigned char* data, short unsigned int size, enum 
     while(sent < size)
     {
 	int ret = protocol_sendFunction(data + sent, size - sent);
+	printf("protocol_sendFunction second");
 	if(ret < 0)
 	{
 	    printf("Error, sending failed");
@@ -217,15 +219,16 @@ void protocol_registerFunc(unsigned int protocolId, funcSignature){
 }
 
 void protocol_processData(){
-    unsigned char buffer[BUFFERSIZE];
+	const int bufferSize = 1024;
+    unsigned char buffer[bufferSize];
     uint16_t received = 0;
     uint64_t id = 0;
     int gotPacket = 0;
 	while(1)
     {
-	if((gotPacket = protocol_receiveData(buffer, &received, BUFFERSIZE, &id)) > 0){
+	if((gotPacket = protocol_receiveData(buffer, &received, bufferSize, &id)) > 0){
 		printf("package received");
-		funcMapping[id](static_cast<PROTOCOL_IDS>(id), buffer, BUFFERSIZE);
+		funcMapping[id](static_cast<PROTOCOL_IDS>(id), buffer, bufferSize);
 	}
 	}
 }
