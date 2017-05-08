@@ -182,7 +182,7 @@ void protocol_sendData(const unsigned char* data, short unsigned int size, enum 
     while(sent < sizeof(struct ProtocolHeader))
     {
 	int ret = protocol_sendFunction(((unsigned char *) &header) + sent, sizeof(struct ProtocolHeader) - sent);
-	printf("protocol_sendFunction first")
+	printf("protocol_sendFunction first");
 	if(ret < 0)
 	{
 	    printf("Error, sending failed");
