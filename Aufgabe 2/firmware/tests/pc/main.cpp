@@ -57,7 +57,7 @@ int main(int argc, char** argv)
     //test ID_TEST
     const int bufSizeTest = 200;
     std::vector<uint8_t> dataTest;
-    data.resize(bufSizeTest);
+    dataTest.resize(bufSizeTest);
     
     for(int i = 0; i < bufSizeTest; i++)
     {
