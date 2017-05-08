@@ -45,10 +45,10 @@ int main()
     protocol_registerFunc(ID_STEP, stepFunction); 
     //should fail
     protocol_registerFunc(PROTOCOL_IDS_SIZE, failFunction); 
-    while(1)
-    {
-        protocol_processData();
-    }
+    //while(1)
+    //{
+    protocol_processData();
+    //}
 
     USART1_DeInit();
     USART2_DeInit();

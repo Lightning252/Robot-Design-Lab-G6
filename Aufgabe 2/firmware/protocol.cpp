@@ -219,10 +219,12 @@ void protocol_processData(){
     uint16_t received = 0;
     uint64_t id = 0;
     int gotPacket = 0;
-
+	while(1)
+    {
 	if((gotPacket = protocol_receiveData(buffer, &received, BUFFERSIZE, &id)) > 0){
 		printf("package received");
 		funcMapping[id](static_cast<PROTOCOL_IDS>(id), buffer, BUFFERSIZE);
+	}
 	}
 }
 
