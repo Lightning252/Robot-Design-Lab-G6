@@ -109,10 +109,25 @@ TIM_OC4PreloadConfig (TIM4, TIM_OCPreload_Enable);
 //connect channels to GPIO -> PA6, PA7, PB0, PB1, PB6, PB7, PB8, PB9 ?
 GPIO_InitTypeDef gpioStructure;
 GPIO_StructInit(&gpioStructure);
-gpioStructure.GPIO_Pin = GPIO_Pin_6;
-//gpioStructure.GPIO_Mode = GPIO_Mode_AF_PP; //?
+gpioStructure.GPIO_Mode = GPIO_Mode_AF_PP; //?
 gpioStructure.GPIO_Speed = GPIO_Speed_50MHz;
-GPIO_Init(GPIOA,&gpioStructure); 
+gpioStructure.GPIO_Pin = GPIO_Pin_6;
+GPIO_Init(GPIOA,&gpioStructure);
+gpioStructure.GPIO_Pin = GPIO_Pin_7;
+GPIO_Init(GPIOA,&gpioStructure);
+gpioStructure.GPIO_Pin = GPIO_Pin_0;
+GPIO_Init(GPIOB,&gpioStructure);
+gpioStructure.GPIO_Pin = GPIO_Pin_1;
+GPIO_Init(GPIOB,&gpioStructure);
+gpioStructure.GPIO_Pin = GPIO_Pin_6;
+GPIO_Init(GPIOB,&gpioStructure);
+gpioStructure.GPIO_Pin = GPIO_Pin_7;
+GPIO_Init(GPIOB,&gpioStructure);
+gpioStructure.GPIO_Pin = GPIO_Pin_8;
+GPIO_Init(GPIOB,&gpioStructure);
+gpioStructure.GPIO_Pin = GPIO_Pin_9;
+GPIO_Init(GPIOB,&gpioStructure);
+    
 
 // Start the timer
 TIM_Cmd (TIM3, ENABLE);
