@@ -58,6 +58,7 @@ int main(int argc, char** argv)
     proto->sendData(data, ID_STEP);
 
     //test ID_TEST
+    /*
     const int bufSizeTest = 200;
     std::vector<uint8_t> dataTest;
     data.resize(bufSizeTest);
@@ -68,6 +69,7 @@ int main(int argc, char** argv)
     }
     std::cout << "Sending test data" <<std::endl;
     proto->sendData(dataTest, ID_TEST);
+    */
 }
 
 void readPrintfs(Communication* com)

@@ -37,6 +37,7 @@ struct ProtocolHeader *protocol_receiveHeader()
         
 	//not more data there, try again later
 	if(ret == 0)
+		printf("no header protocol_recvFunction \n");
 	    return 0;
 
 	//search for the magic byte
@@ -99,6 +100,7 @@ signed int protocol_receiveData(unsigned char* data, uint16_t* dataSize, short u
 	
 	//no header there
 	if(!header)
+		printf("no header protocol_receiveData\n");
 	    return 0;
 	
 //         printf("Got Header \n");
